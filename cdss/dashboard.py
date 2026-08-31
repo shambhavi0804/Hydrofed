@@ -370,6 +370,8 @@ class DashboardHandler(BaseHTTPRequestHandler):
 import numpy as np
 
 def run_server(port=8080):
+    import subprocess
+    import sys
     init_database()
     # Pre-register some mock patients in database for easy searching
     p_repo = PatientRepository()
@@ -379,14 +381,13 @@ def run_server(port=8080):
         p_repo.register_patient('person101')
         p_repo.register_patient('normal_0001')
         
-    server_address = ('', port)
-    httpd = HTTPServer(server_address, DashboardHandler)
-    print(f"HydroFed-ICAF Portal Running locally at: http://localhost:{port}")
+    print(f"Launching Streamlit Portal on port {port}...")
+    cmd = [sys.executable, "-m", "streamlit", "run", "cdss/app.py", "--server.port", str(port)]
     try:
-        httpd.serve_forever()
+        subprocess.run(cmd)
     except KeyboardInterrupt:
         print("\nStopping portal...")
-        httpd.server_close()
 
 if __name__ == '__main__':
     run_server(8080)
+

@@ -15,7 +15,8 @@ def overlay_heatmap(image_tensor, heatmap, alpha=0.6):
     # 1. Convert tensor to numpy array [0, 255] grayscale or RGB
     if isinstance(image_tensor, torch.Tensor):
         # Move channel dimension to the end: shape becomes (H, W, C)
-        img_np = image_tensor.cpu().numpy()
+        img_np = image_tensor.detach().cpu().numpy()
+
         # If it was normalized, we should unnormalize:
         # In preprocessing.py, we did: img_norm = (img_normalized - mean) / std
         # Let's simple min-max project it back to [0, 255] for visual correctness:

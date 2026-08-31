@@ -67,11 +67,16 @@ python -m unittest tests/test_federated.py
 ```
 
 ### Running CDSS Dashboard Portal
-Start the local clinician HTTP server (runs on port 8080 by default):
+Start the clinician dashboard workspace (runs on port 8080 by default):
 ```bash
 python -m cdss.dashboard
 ```
-Open your web browser and navigate to `http://localhost:8080` to access the interactive clinicians dashboard.
+Alternatively, run Streamlit directly:
+```bash
+streamlit run cdss/app.py
+```
+Open your web browser and navigate to `http://localhost:8080` (or `http://localhost:8501` for direct streamlit run) to access the interactive clinicians dashboard workspace.
+
 
 ### Running Federated Simulation
 To simulate the 60-node decentralized consensus and save baselines:
