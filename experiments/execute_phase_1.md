@@ -26,18 +26,18 @@ Below is the table of the exact statistics (Shape, Mean, Standard Deviation, Min
 
 | Variable Name | Tensor Shape | Mean | Std Dev | Minimum | Maximum |
 | :--- | :--- | :---: | :---: | :---: | :---: |
-| **$Fs$** (Spatial features) | [1, 128, 7, 7] | -0.243632 | 1.928009 | -7.143419 | 5.581689 |
-| **$Ff$** (Frequency features) | [1, 128, 7, 7] | -0.000184 | 0.112346 | -0.889582 | 1.095525 |
-| **$Q_s$** (Spatial Query projection) | [1, 49, 128] | 0.115321 | 1.939919 | -8.024058 | 6.815871 |
-| **$K_f$** (Frequency Key projection) | [1, 49, 128] | 0.002625 | 0.112316 | -1.118043 | 1.160142 |
-| **$Att\_map\_sf$** (Attention weights) | [1, 49, 49] | 0.020408 | 0.003366 | 0.015494 | 0.055698 |
-| **$Att\_sf$** (S-to-F attention output) | [1, 128, 7, 7] | -0.000535 | 0.101206 | -0.293298 | 0.251222 |
-| **$Att\_fs$** (F-to-S attention output) | [1, 128, 7, 7] | 0.046275 | 1.751467 | -4.145853 | 4.380567 |
-| **$F\_cross$** (Concat features) | [1, 256, 7, 7] | 0.022870 | 1.240711 | -4.145853 | 4.380567 |
-| **$F\_aica$** (AICA projection) | [1, 128, 7, 7] | 0.111845 | 1.192184 | -3.022709 | 3.624777 |
-| **$G$** (Gating factor values) | [1, 128, 7, 7] | 0.469499 | 0.258844 | 0.007107 | 0.993757 |
-| **$F\_fused$** (Gated fused maps) | [1, 128, 7, 7] | 0.037708 | 1.064491 | -3.302500 | 3.475913 |
-| **$F\_final$** (LayerNorm output) | [1, 128, 7, 7] | -0.000000 | 1.000078 | -3.202435 | 2.679453 |
+| **$Fs$** (Spatial features) | [1, 128, 7, 7] | -0.257206 | 1.985176 | -6.800609 | 5.800369 |
+| **$Ff$** (Frequency features) | [1, 128, 7, 7] | -0.000033 | 0.111531 | -0.851724 | 1.080174 |
+| **$Q_s$** (Spatial Query projection) | [1, 49, 128] | 0.121123 | 1.998103 | -7.831866 | 7.100307 |
+| **$K_f$** (Frequency Key projection) | [1, 49, 128] | 0.002691 | 0.111499 | -1.071689 | 1.088322 |
+| **$Att\_map\_sf$** (Attention weights) | [1, 49, 49] | 0.020408 | 0.003868 | 0.015913 | 0.065866 |
+| **$Att\_sf$** (S-to-F attention output) | [1, 128, 7, 7] | -0.000540 | 0.101826 | -0.298190 | 0.252329 |
+| **$Att\_fs$** (F-to-S attention output) | [1, 128, 7, 7] | 0.044323 | 1.796444 | -4.209751 | 4.560416 |
+| **$F\_cross$** (Concat features) | [1, 256, 7, 7] | 0.021891 | 1.272464 | -4.209751 | 4.560416 |
+| **$F\_aica$** (AICA projection) | [1, 128, 7, 7] | 0.121424 | 1.223577 | -3.025181 | 3.782410 |
+| **$G$** (Gating factor values) | [1, 128, 7, 7] | 0.469090 | 0.265001 | 0.008631 | 0.995982 |
+| **$F\_fused$** (Gated fused maps) | [1, 128, 7, 7] | 0.035207 | 1.098960 | -3.347507 | 3.384287 |
+| **$F\_final$** (LayerNorm output) | [1, 128, 7, 7] | -0.000000 | 1.000078 | -3.227663 | 2.595977 |
 
 ### Intermediate Feature Activations Visualization
 The channel-averaged activation maps of all intermediate layers are shown below:

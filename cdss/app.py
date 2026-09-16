@@ -5,6 +5,7 @@ import base64
 import numpy as np
 import pandas as pd
 import cv2
+import json
 from PIL import Image
 import matplotlib.pyplot as plt
 import streamlit as st
@@ -325,7 +326,7 @@ elif selected_page == "🔍 Patient Search & Selection":
     else:
         df_p = pd.DataFrame(filtered_p)
         df_p.rename(columns={'patient_id': 'Patient ID', 'created_at': 'Registration Date', 'status': 'Status'}, inplace=True)
-        st.dataframe(df_p, use_container_width=True)
+        st.dataframe(df_p, width="stretch")
         
         # Selection Box
         p_ids = [p['patient_id'] for p in filtered_p]
@@ -408,18 +409,18 @@ elif selected_page == "🩻 X-ray Analysis":
                 # User uploaded a custom file
                 custom_image_bytes = uploaded_file.read()
                 image = Image.open(uploaded_file)
-                st.image(image, caption="Uploaded Chest X-ray Image", use_container_width=True)
+                st.image(image, caption="Uploaded Chest X-ray Image",width="stretch")
             elif selected_preset_idx > 0:
                 # User selected a preset
                 target_image_path = mock_cases[selected_preset_idx - 1]["path"]
                 if os.path.exists(target_image_path):
-                    st.image(target_image_path, caption="Selected Preset X-ray", use_container_width=True)
+                    st.image(target_image_path, caption="Selected Preset X-ray",width="stretch")
                 else:
                     st.error(f"Preset file not found at: {target_image_path}")
             else:
                 st.write("No image selected/uploaded yet.")
                 
-        if st.button("🚀 Execute Multimodal Diagnostics Pipeline", use_container_width=True):
+        if st.button("🚀 Execute Multimodal Diagnostics Pipeline", width="stretch"):
             if not target_image_path and not custom_image_bytes:
                 st.error("Please configure a radiological image (preset or upload) to run diagnostics.")
             else:
@@ -593,11 +594,11 @@ elif selected_page == "🧬 CDSS Classifier":
         with col1:
             st.markdown("### Raw Input Chest X-ray")
             if os.path.exists(res['raw_image_path']):
-                st.image(res['raw_image_path'], use_container_width=True)
+                st.image(res['raw_image_path'], width="stretch")
         with col2:
             st.markdown("### Preprocessed Visual Map")
             if os.path.exists(res['preprocessed_image_path']):
-                st.image(res['preprocessed_image_path'], use_container_width=True)
+                st.image(res['preprocessed_image_path'], width="stretch")
                 
         # CDSS Metrics
         st.markdown("<hr style='border-color: #334155;'/>", unsafe_allow_html=True)
@@ -657,7 +658,9 @@ elif selected_page == "🧬 CDSS Classifier":
         # Clinician Review Form
         st.subheader("Submit Clinician Diagnostic Review & SQLite Signing")
         with st.form("clinician_review_form"):
-            rev_ref = st.text_input("Clinician Reference ID / Name Signature", placeholder="e.g. Dr. Roberts", required=True)
+            rev_ref = st.text_input( "Clinician Reference ID / Name Signature",placeholder="e.g. Dr. Roberts")
+            if not rev_ref.strip():
+                st.warning("Clinician reference ID / name signature is required.")
             rev_status = st.radio("Diagnostic Review Finding Decision", ["CONFIRMED", "NEEDS_REVIEW", "UNABLE_TO_DETERMINE"])
             rev_notes = st.text_area("Clinical Notes & Diagnostic Findings", placeholder="Write structural observation remarks here...")
             
@@ -696,13 +699,13 @@ elif selected_page == "🔍 Pathology Saliency (XAI)":
         with col1:
             st.subheader("Grad-CAM Heatmap Overlay")
             if os.path.exists(res['gradcam_path']):
-                st.image(res['gradcam_path'], caption="Grad-CAM Pathology Highlight", use_container_width=True)
+                st.image(res['gradcam_path'], caption="Grad-CAM Pathology Highlight", width="stretch")
             else:
                 st.write("Grad-CAM image not found.")
         with col2:
             st.subheader("Grad-CAM++ Heatmap Overlay")
             if os.path.exists(res['gradcam_plus_path']):
-                st.image(res['gradcam_plus_path'], caption="Grad-CAM++ Fine Granularity Highlight", use_container_width=True)
+                st.image(res['gradcam_plus_path'], caption="Grad-CAM++ Fine Granularity Highlight", width="stretch")
             else:
                 st.write("Grad-CAM++ image not found.")
 
@@ -788,7 +791,7 @@ elif selected_page == "📈 Longitudinal Trend":
                     'Pneumonia Prob.': '{:.2%}',
                     'Uncertainty': '{:.4f}',
                     'Confidence': '{:.2%}'
-                }), use_container_width=True)
+                }),width="stretch")
 
 # ==========================================
 # 9. EDGE PERFORMANCE METRICS
@@ -849,7 +852,7 @@ elif selected_page == "🌐 Federated Network Gossip":
     )
     
     # Advance Round Action
-    if st.button("🔄 Advance Decentralized Gossip Communication Round", use_container_width=True):
+    if st.button("🔄 Advance Decentralized Gossip Communication Round", width="stretch"):
         with st.spinner("Executing gossip communications and secure parameter exchanges..."):
             runner = get_experiment_runner()
             test_metrics, consensus_errors = runner.run_decentralized_hydrofed(rounds=1)
@@ -1127,4 +1130,4 @@ elif selected_page == "📑 System Security Audit Log":
             'patient_id': 'Patient ID',
             'visit_id': 'Visit ID'
         }, inplace=True)
-        st.dataframe(df_l[['Timestamp', 'Event Type', 'Actor Signature', 'Patient ID', 'Visit ID']], use_container_width=True)
+        st.dataframe(df_l[['Timestamp', 'Event Type', 'Actor Signature', 'Patient ID', 'Visit ID']],width="stretch")
